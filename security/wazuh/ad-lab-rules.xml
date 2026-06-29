@@ -1,0 +1,38 @@
+<group name="windows,active_directory,ad_lab,">
+  <rule id="110001" level="10">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">4728</field>
+    <description>User added to privileged global security group</description>
+    <mitre>
+      <id>T1098</id>
+    </mitre>
+  </rule>
+
+  <rule id="110002" level="9">
+    <if_sid>60103</if_sid>
+    <field name="win.system.eventID">4625</field>
+    <description>Windows failed logon event observed</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+  </rule>
+
+  <rule id="110003" level="12">
+    <if_sid>61603</if_sid>
+    <field name="win.eventdata.image">.*\\vssadmin.exe</field>
+    <description>Shadow copy manipulation command observed</description>
+    <mitre>
+      <id>T1490</id>
+    </mitre>
+  </rule>
+
+  <rule id="110004" level="11">
+    <if_sid>61603</if_sid>
+    <field name="win.eventdata.commandLine">(?i).*kerberoast.*|.*GetUserSPNs.*</field>
+    <description>Possible Kerberoasting tool activity</description>
+    <mitre>
+      <id>T1558.003</id>
+    </mitre>
+  </rule>
+</group>
+

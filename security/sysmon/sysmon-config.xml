@@ -1,0 +1,35 @@
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>sha256</HashAlgorithms>
+  <EventFiltering>
+    <ProcessCreate onmatch="include">
+      <Image condition="end with">powershell.exe</Image>
+      <Image condition="end with">pwsh.exe</Image>
+      <Image condition="end with">cmd.exe</Image>
+      <Image condition="end with">rundll32.exe</Image>
+      <Image condition="end with">regsvr32.exe</Image>
+      <Image condition="end with">wmic.exe</Image>
+      <Image condition="end with">nltest.exe</Image>
+      <Image condition="end with">net.exe</Image>
+      <Image condition="end with">net1.exe</Image>
+      <Image condition="end with">vssadmin.exe</Image>
+    </ProcessCreate>
+    <NetworkConnect onmatch="include">
+      <DestinationPort condition="is">88</DestinationPort>
+      <DestinationPort condition="is">389</DestinationPort>
+      <DestinationPort condition="is">445</DestinationPort>
+      <DestinationPort condition="is">5985</DestinationPort>
+    </NetworkConnect>
+    <FileCreate onmatch="include">
+      <TargetFilename condition="contains">\Temp\</TargetFilename>
+      <TargetFilename condition="end with">.ps1</TargetFilename>
+      <TargetFilename condition="end with">.bat</TargetFilename>
+      <TargetFilename condition="end with">.vbs</TargetFilename>
+    </FileCreate>
+    <RegistryEvent onmatch="include">
+      <TargetObject condition="contains">\Run</TargetObject>
+      <TargetObject condition="contains">\Winlogon\Shell</TargetObject>
+      <TargetObject condition="contains">\Lsa</TargetObject>
+    </RegistryEvent>
+  </EventFiltering>
+</Sysmon>
+

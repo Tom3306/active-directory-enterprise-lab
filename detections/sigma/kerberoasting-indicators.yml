@@ -1,0 +1,23 @@
+title: Kerberoasting Indicators
+id: c3f12f65-f88d-4de6-9bb5-ec6d032fe7bb
+status: experimental
+description: Detects Kerberos service ticket requests using RC4 encryption, a common Kerberoasting signal.
+author: Tom3306
+date: 2026-06-29
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4769
+    TicketEncryptionType: '0x17'
+  filter_machine_accounts:
+    ServiceName|endswith: '$'
+  condition: selection and not filter_machine_accounts
+falsepositives:
+  - Legacy applications requiring RC4
+level: medium
+tags:
+  - attack.credential_access
+  - attack.t1558.003
+

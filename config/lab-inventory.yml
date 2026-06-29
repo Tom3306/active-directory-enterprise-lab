@@ -1,0 +1,42 @@
+domain:
+  fqdn: corp.local
+  netbios: CORP
+  safe_mode_admin_password: change-in-local-lab-only
+
+network:
+  cidr: 10.10.20.0/24
+  dns: 10.10.20.10
+
+hosts:
+  - name: DC01
+    role: domain_controller
+    ip: 10.10.20.10
+    os: Windows Server 2022
+  - name: FS01
+    role: file_server
+    ip: 10.10.20.20
+    os: Windows Server 2022
+  - name: WS01
+    role: workstation
+    ip: 10.10.20.101
+    os: Windows 11 Enterprise
+  - name: WAZUH01
+    role: detection_server
+    ip: 10.10.20.50
+    os: Ubuntu Server
+
+organizational_units:
+  - Workstations
+  - Servers
+  - Tier0
+  - Service Accounts
+  - Security Groups
+  - Disabled Users
+
+security_groups:
+  - Helpdesk-Password-Reset
+  - Workstation-Admins
+  - Server-Admins
+  - SOC-Analysts
+  - File-Share-Finance-Read
+

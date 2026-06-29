@@ -1,0 +1,39 @@
+name: Validate Lab Content
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check required files
+        run: |
+          test -s README.md
+          test -s config/lab-inventory.yml
+          test -s security/sysmon/sysmon-config.xml
+          test -s security/wazuh/ad-lab-rules.xml
+          test -s docs/recruiter-brief.md
+      - name: Validate XML files
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          import xml.etree.ElementTree as ET
+          for path in pathlib.Path(".").glob("security/**/*.xml"):
+              ET.parse(path)
+              print(f"valid xml: {path}")
+          PY
+      - name: Check PowerShell scripts are non-empty
+        run: |
+          find scripts/powershell -name '*.ps1' -type f -size +0c | sort
+          expected=7
+          actual="$(find scripts/powershell -name '*.ps1' -type f -size +0c | wc -l)"
+          test "$actual" -eq "$expected"
+

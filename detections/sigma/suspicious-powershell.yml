@@ -1,0 +1,30 @@
+title: Suspicious PowerShell In Active Directory Lab
+id: 0915d7ab-5f13-4cf4-97db-296d4ac7b92c
+status: experimental
+description: Detects encoded or hidden PowerShell commands commonly used during intrusion activity.
+author: Tom3306
+date: 2026-06-29
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_img:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  selection_cli:
+    CommandLine|contains:
+      - '-enc'
+      - '-encodedcommand'
+      - '-nop'
+      - '-w hidden'
+      - 'IEX'
+      - 'DownloadString'
+  condition: selection_img and selection_cli
+falsepositives:
+  - Administrator troubleshooting scripts
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001
+
