@@ -1,23 +1,27 @@
 # Active Directory Enterprise Lab
 
-A portfolio-grade Windows enterprise security lab for Active Directory administration, hardening, detection engineering, attack simulation, and incident response.
+A small Windows domain lab for practicing Active Directory administration, hardening, detection engineering, and incident response in an isolated environment.
 
 ## Business Problem
 
-Many ransomware intrusions begin with identity weaknesses: weak passwords, overprivileged users, misconfigured Group Policy, poor logging, and unmanaged lateral movement. This lab shows how to build a small Windows domain, attack it safely, detect suspicious behavior, and improve defenses.
+Many ransomware intrusions begin with ordinary identity weaknesses: weak passwords, overprivileged users, loose Group Policy, poor logging, and unmanaged lateral movement. This repo keeps the scope practical: build a small lab domain, generate safe telemetry, and tune detections without touching a real environment.
 
-## What This Builds
+## What Is Included
 
-- Domain Controller design for `corp.local`
-- Workstation and file server topology
+- Domain Controller plan for `corp.local`
+- Workstation, file server, and Wazuh topology
 - Organizational Units and security groups
 - Lab users and service account model
 - Group Policy security baseline
 - Sysmon endpoint telemetry configuration
 - Wazuh rules for Active Directory detections
 - Sigma detections for common identity attacks
-- Safe attack simulations to generate telemetry
+- Lab-only simulations to generate telemetry
 - Incident response collection script and runbook
+
+## Validation Status
+
+The repository content has been checked for required files, XML parsing, PowerShell script presence, and whitespace issues. The scripts have not yet been executed against live Windows VMs in this workspace, so treat this as a reproducible lab blueprint until you run it in an isolated domain.
 
 ## Repository Structure
 
@@ -46,5 +50,4 @@ This project is for an isolated lab domain only. Do not run attack simulations a
 
 ## Recruiter Summary
 
-This project demonstrates practical Windows security engineering: Active Directory administration, identity security, Group Policy hardening, Sysmon/Wazuh detection engineering, and incident response for realistic ransomware-style attack paths.
-
+This project shows the pieces a focused Windows security lab should have: AD structure, hardening scripts, endpoint telemetry, Wazuh/Sigma detections, controlled simulations, and an investigation runbook. It should not be described as a production AD deployment or as live-tested until the Windows lab has actually been built.

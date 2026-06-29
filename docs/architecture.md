@@ -2,7 +2,7 @@
 
 ## Lab Topology
 
-The lab models a small Windows enterprise environment.
+The lab models a small Windows environment, enough to practice the identity and telemetry workflows without pretending to be a full company network.
 
 | Host | Role | Purpose |
 | --- | --- | --- |
@@ -24,6 +24,5 @@ The lab models a small Windows enterprise environment.
 - Apply baseline hardening through Group Policy.
 - Deploy Sysmon for endpoint telemetry.
 - Forward Windows and Sysmon events into Wazuh.
-- Detect common ransomware and identity attack behaviors.
+- Detect common identity attack behaviors that often appear in ransomware intrusions.
 - Practice incident response triage with repeatable evidence collection.
-
